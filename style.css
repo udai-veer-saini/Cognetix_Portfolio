@@ -4,6 +4,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Outfit',sans-serif;
 }
 
 html {
@@ -14,6 +15,39 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:#0a0a0a;
     color:#fff;
+    animation:fadeIn .7s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+::selection{
+    background:#facc15;
+    color:#000;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0a0a0a;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#facc15;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#fde047;
 }
 
 /* NAVBAR */
@@ -22,13 +56,15 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
-    background:#0a0a0a;
-    border-bottom:1px solid #222;
+    background: rgba(10,10,10,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1f1f1f;
 }
 
 .navbar{
     width:85%;
-    height:80px;
+    height:90px;
     margin:auto;
 
     display:flex;
@@ -37,10 +73,21 @@ header{
 }
 
 .logo{
-    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:12px;
+
     text-decoration:none;
-    font-size:2rem;
+    color:#fff;
+    font-size:32px;
     font-weight:700;
+    letter-spacing:.5px;
+}
+
+.logo img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
 }
 
 .nav-links{
@@ -54,18 +101,45 @@ header{
     color:#fff;
     font-size:16px;
     transition:.3s;
+    position:relative;
+    font-weight:500;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:2px;
+
+    background:#facc15;
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
 }
 
 .nav-links a:hover{
-    color:#facc15;
+    color:#fff;
+}
+
+.nav-links a.active{
+    color:#ffe0b7;
+}
+
+.nav-links a.active::after{
+    width:100%;
 }
 
 .nav-btn{
     text-decoration:none;
     color:#000;
     background:#facc15;
-    padding:12px 28px;
-    border-radius:30px;
+    border-radius:50px;
+    padding:13px 28px;
     font-weight:600;
     transition:.3s;
 }
@@ -162,16 +236,24 @@ header{
     height:420px;
     border-radius:50%;
     background:#facc15;
-    opacity:.15;
+
     position:absolute;
+    z-index:0;
+
+    opacity:.18;
+    filter:blur(80px);
 }
 
 .hero-image img{
     width:420px;
-    border-radius:210px;
+    border-radius:50%;
     position:relative;
+    z-index:1;
+    border:2px solid rgba(250,204,21,.35);
+    box-shadow:
+        0 0 40px rgba(250,204,21,.15),
+        0 20px 60px rgba(0,0,0,.5);
 }
-
 /* RESPONSIVE */
 
 @media (max-width:992px){
@@ -236,8 +318,9 @@ header{
 }
 
 .section-title h2{
-    font-size:42px;
+    font-size:48px;
     margin:15px 0;
+    font-weight:700;
 }
 
 .section-title p{
@@ -259,6 +342,7 @@ header{
     border-radius:20px;
     padding:40px 30px;
     transition:.3s;
+    box-shadow:0 10px 30px rgba(0, 53, 70, 0.32)
 }
 
 .service-card:hover{
@@ -309,6 +393,7 @@ header{
     overflow:hidden;
     border:1px solid #222;
     transition:.3s;
+    box-shadow:0 10px 30px rgba(75, 75, 75, 0.35);
 }
 
 .project-card:hover{
@@ -321,6 +406,13 @@ header{
     height:260px;
     object-fit:cover;
     display:block;
+    transition:.35s ease;
+    overflow:hidden;
+
+}
+
+.project-card:hover img{
+    transform:scale(1.05);
 }
 
 .project-content{
@@ -333,12 +425,50 @@ header{
 }
 
 .project-content h3{
-    margin-bottom:10px;
-    font-size:24px;
+    font-size:26px;
+    margin-bottom:12px;
+    font-weight:700;
 }
 
 .project-content p{
     color:#9ca3af;
+    line-height:1.8;
+}
+
+.project-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.project-buttons a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    padding:12px 0;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s ease;
+}
+
+.live-btn{
+    background:#facc15;
+    color:#000;
+}
+
+.live-btn:hover{
+    background:#fde047;
+}
+
+.github-btn{
+    border:2px solid #facc15;
+    color:#fff;
+}
+
+.github-btn:hover{
+    background:#facc15;
+    color:#000;
 }
 
 @media(max-width:992px){
@@ -476,6 +606,7 @@ header{
 .contact-form input:focus,
 .contact-form textarea:focus{
     border-color:#facc15;
+    box-shadow:0 0 15px rgba(250,204,21,.2);
 }
 
 .contact-form textarea{
@@ -593,4 +724,18 @@ hr{
         align-items:center;
     }
 
+}
+
+.hidden{
+    opacity:0;
+    transform:translateY(50px);
+    transition:all .8s ease;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+i{
+    margin-right:8px;
 }
