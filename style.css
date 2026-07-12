@@ -452,6 +452,33 @@ header{
     transition:.3s ease;
 }
 
+.view-all{
+    margin-top:0px;
+    display:flex;
+    justify-content:center;
+}
+
+.view-all a{
+    text-decoration:none;
+    color:#facc15;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.view-all a i{
+    margin-left:8px;
+    transition:.3s;
+}
+
+.view-all a:hover{
+    color:#fde047;
+}
+
+.view-all a:hover i{
+    transform:translateX(8px);
+}
+
 .live-btn{
     background:#facc15;
     color:#000;
